@@ -2,6 +2,7 @@ function Ball(img){
 	this.x = width/2;
 	this.y = height/2;
 	this.r = 25;
+	this.lastHit = "none";
 
 	this.yspeed = 2.2;
 	this.xspeed = 2.2;
@@ -53,6 +54,7 @@ function Ball(img){
 		this.xspeed += 0.2;
 		if(stick.ydir != 0){
 			this.ydir  += stick.ydir/2;
+			this.lastHit = stick.name;
 		}
 	}
 
@@ -69,10 +71,15 @@ function Ball(img){
 		}
 	}
 
+	this.match = function(side){
+		return(this.lastHit === side);
+	}
+
 	this.reset = function(){
 		this.x = width/2;
 		this.y = height/2;
 		this.r = 20;
+		this.lastHit = 'none';
 
 		this.yspeed = 2.2;
 		this.xspeed = 2.2;

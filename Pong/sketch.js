@@ -3,20 +3,26 @@ var ball;
 var wallDis = 50;
 var score = [];
 var won = false;
-var LastHit = "none";
+var choices = ['left', 'right'];
+var song;
 
 function preload(){
 	chick = loadImage('images/chick.png');
 	farm = loadImage('images/Farm.jpg');
+	song = loadSound('music/chick_song.mp3');
 }
 
 function setup(){
-	canvas = createCanvas(800, 800);
-	sticks[0] = new Stick(0+wallDis);
-	sticks[1] = new Stick(width-wallDis);
+	var canvas = createCanvas(800, 800);
+	sticks[0] = new Stick(0+wallDis, 'left');
+	sticks[1] = new Stick(width-wallDis, 'right');
 	ball = new Ball(chick);
 	score[0] = new ScoreBoard(width/3, 50);
 	score[1] = new ScoreBoard(width*2/3, 50);
+	var x = (windowWidth - width)/2;
+	var y = (windowHeight - height)/2;
+	canvas.position(x, y);
+	song.loop();
 }
 
 function draw(){
@@ -40,7 +46,7 @@ function draw(){
 		score[1].show();
 
 		for(var i = 0; i<sticks.length; i++){
-			if(ball.hits(sticks[i])){
+			if(ball.hits(sticks[i]) && !ball.match(choices[i])){
 				ball.bounce(sticks[i]);
 			}
 		}
@@ -53,12 +59,12 @@ function draw(){
 			}
 		}
 		else if(ball.goal() === "left"){
-			score[1].score(); 
+			score[1].score();
 			ball.reset();
 			if(score[1].win()){
 				won = true;
 			}
-		}		
+		}
 	}
 	else{
 		fill(255);
@@ -69,10 +75,8 @@ function draw(){
 		}
 		else if(score[1].win()){
 			text("Player 2 Wins!", width/2-140, height/2);
-		}		
+		}
 	}
-	
-
 }
 
 function keyReleased(){
@@ -98,3 +102,14 @@ function keyPressed(){
 		sticks[0].setDir(1);
 	}
 }
+
+/*
+function mousePressed() {
+  if ( song.isPlaying() ) { // .isPlaying() returns a boolean
+    song.pause(); // .play() will resume from .pause() position
+    background(255,0,0);
+  } else {
+    song.play();
+    background(0,255,0);
+  }
+}*/

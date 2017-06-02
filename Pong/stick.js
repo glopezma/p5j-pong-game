@@ -1,9 +1,10 @@
-function Stick(x){
+function Stick(x, name){
 	this.x=x;
-	this.y=height/2; 
+	this.y=height/2;
 	this.yspeed = 2.5;
 	this.dis=75;
 	this.ydir = 0;
+	this.name = name;
 
 	this.show = function() {
 		fill(255);
@@ -23,7 +24,7 @@ function Stick(x){
 			else{
 				this.y += this.ydir*this.yspeed;
 			}
-		} 
+		}
 		else if (this.y+this.dis >= height){
 			if(this.ydir >= 1){
 				this.ydir = 0;
