@@ -58,6 +58,22 @@ function Ball(img){
 		}
 	}
 
+	// this.bounce = function(stick){
+	// 	this.xdir   *= -1;
+	// 	this.xspeed += 0.2;
+	// 	if(stick.ydir != 0){
+	// 		if(this.y < stick.y){
+	// 			yspeed = map(stick.y, stick.y-stick.dis, stick.yspeed/2, stick.yspeed*2);
+	// 			yspeed = constrain(speed, )
+	// 		}
+	// 		else if(this.y > stick.y){
+	// 			this.ysped += map(stick.y, stick.y+stick.dis, stick.yspeed/2, stick.yspeed*2);
+	// 		}
+	// 		this.ydir += stick.ydir/2;
+	// 		this.lastHit = stick.name;
+	// 	}
+	// }
+
 	this.edge = function(){
 		return (this.y-this.r < 0 || this.y+this.r > height);
 	}

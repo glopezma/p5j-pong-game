@@ -4,12 +4,21 @@ var wallDis = 50;
 var score = [];
 var won = false;
 var choices = ['left', 'right'];
-var song;
+var songs = [];
+var songNames = ['music/penguin_RIP01.mp3', 'music/penguin_RIP02.mp3', 'music/penguin_RIP03.mp3', 'music/penguin_RIP04.mp3', 'music/penguin_RIP05.mp3'];
+// var yspeed;
 
 function preload(){
 	chick = loadImage('images/chick.png');
 	farm = loadImage('images/Farm.jpg');
-	song = loadSound('music/chick_song.mp3');
+	songs[0] = loadSound('music/chick_song.mp3');
+	songs[0].amp(0.1);
+	for(var i = 0; i<songNames.length; i++){
+		songs[i+1] = loadSound(songNames[i]);
+		songs[i+1].amp(1);
+	}
+
+
 }
 
 function setup(){
@@ -22,7 +31,7 @@ function setup(){
 	var x = (windowWidth - width)/2;
 	var y = (windowHeight - height)/2;
 	canvas.position(x, y);
-	song.loop();
+	songs[0].loop();
 }
 
 function draw(){
@@ -48,6 +57,7 @@ function draw(){
 		for(var i = 0; i<sticks.length; i++){
 			if(ball.hits(sticks[i]) && !ball.match(choices[i])){
 				ball.bounce(sticks[i]);
+				songs[(int(random(0,100))%5)+1].play();
 			}
 		}
 
